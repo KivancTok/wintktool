@@ -15,7 +15,7 @@ color_dict = {
 
 root = Tk()
 root.title("Windows Tkinter Tool")
-root.geometry("400x315")
+root.geometry("570x343")
 
 
 def run():
@@ -54,6 +54,9 @@ def run():
 
     change_win_geometry_btn = Button(root, text="Change Window Geometry (from Python Console)", bg="#00AEFF", command=change_geometry)
     change_win_geometry_btn.pack()
+    
+    open_file_btn = Button(root, text="Open File (from Python Console)", bg="#FFDC51", command=open_file)
+    open_file_btn.pack()
     mainloop()
 
 
@@ -77,7 +80,7 @@ def open_py_console():
 
 def wetk_help():
     help_win = Tk()
-    help_win.title("Windows Tkinter Tool Help")
+    help_win.title("=========Windows Tkinter Tool Help===========")
     help_label = Label(help_win, text="Windows Tkinter Tool is a tool designed with Tkinter. Red color: Very high risk, Orange color: High risk, Yellow color: Medium risk, Green color: Low risk, Blue color: No risk.")
     help_label.pack()
 
@@ -133,6 +136,11 @@ def change_geometry():
     w = int(input("Width: "))
     h = int(input("Height: "))
     root.geometry(f"{w}x{h}")
+
+
+def open_file():
+    filename = str(input("Enter filename (use \\ to indicate the subdirectory): "))
+    startfile(filename)
 
 
 run()
