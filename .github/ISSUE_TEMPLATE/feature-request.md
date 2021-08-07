@@ -2,7 +2,7 @@
 name: Feature Request
 about: Requested feature
 title: Requested feature
-labels: ''
+labels: wanted feature
 assignees: ''
 
 ---
