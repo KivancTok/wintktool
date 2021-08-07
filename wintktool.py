@@ -1,16 +1,19 @@
 import os
 from tkinter import *
 from tkinter.scrolledtext import ScrolledText
+from tkinter.simpledialog import askstring
 from turtle import *
 from os import system, startfile
 from gtts import gTTS
+from time import sleep
+import win10toast
 
 color_dict = {
-    "#FF3F5F": "red",
-    "#FF8A47": "orange",
-    "#FFDC51": "yellow",
-    "#3AFF7F": "green",
-    "#00AEFF": "blue"
+    "red": "#FF3F5F",
+    "orange": "#FF8A47",
+    "yellow": "#FFDC51",
+    "green": "#3AFF7F",
+    "blue": "#00AEFF"
 }
 
 root = Tk()
@@ -18,7 +21,7 @@ root.title("Windows Tkinter Tool")
 root.geometry("570x345")
 
 
-def run():
+def main():
     help_btn = Button(root, text="Help", bg="#00AEFF", command=wtt_help)
     help_btn.pack()
 
@@ -57,6 +60,9 @@ def run():
     
     open_file_btn = Button(root, text="Open File (from Python Console)", bg="#FFDC51", command=open_file)
     open_file_btn.pack()
+
+    set_alarm_btn = Button(root, text="Set Alarm", bg=color_dict["blue"], command=set_alarm)
+    set_alarm_btn.pack()
     mainloop()
 
 
@@ -143,4 +149,16 @@ def open_file():
     startfile(filename)
 
 
-run()
+def set_alarm():
+    alarm_length = askstring("Input Alarm Length", "Enter how much the alarm will last (hh:mm:ss): ")
+    alarm_hrs_mins_secs = alarm_length.split(":")
+    alarm_hrs = int(alarm_hrs_mins_secs[0])
+    alarm_mins = int(alarm_hrs_mins_secs[1])
+    alarm_secs = int(alarm_hrs_mins_secs[2])
+    toaster = win10toast.ToastNotifier()
+    sleep((alarm_hrs * (60 ** 2)) + (alarm_mins * (60 ** 1)) + (alarm_secs * (60 ** 0)))
+    toaster.show_toast("Alarm finished", "Alarm finished", duration=5)
+
+
+if __name__ == "__main__":
+    main()
