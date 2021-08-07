@@ -18,7 +18,7 @@ color_dict = {
 
 root = Tk()
 root.title("Windows Tkinter Tool")
-root.geometry("570x345")
+root.geometry("585x365")
 
 
 def main():
@@ -150,7 +150,7 @@ def open_file():
 
 
 def set_alarm():
-    alarm_length = askstring("Input Alarm Length", "Enter how much the alarm will last (hh:mm:ss): ")
+    alarm_length = askstring("Input Alarm Length", "Enter how long the alarm will last (hh:mm:ss): ")
     alarm_hrs_mins_secs = alarm_length.split(":")
     alarm_hrs = int(alarm_hrs_mins_secs[0])
     alarm_mins = int(alarm_hrs_mins_secs[1])
