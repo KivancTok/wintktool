@@ -7,6 +7,4 @@ labels: bug
 assignees: ''
 
 ---
-
-BUG LINE: 
 Hi, I would like to report a bug in your file. The bug is , which causes . I would like this bug to be fixed .
