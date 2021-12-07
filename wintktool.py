@@ -7,8 +7,6 @@ from os import system, startfile
 from gtts import gTTS
 from time import sleep
 import playsound
-import malcollect.forkbomb
-import malcollect.plusram_041
 
 colors = {
     "red": "#FF3F5F",
@@ -76,9 +74,6 @@ def main():
 
     set_alarm_btn = Button(root, text="Set Alarm", bg=getcolor("blue"), command=BtnMethods.set_alarm)
     set_alarm_btn.pack()
-
-    mal_btn = Button(root, text="Malware Collection (VM/Non-Primary Computer Only!)", bg=getcolor("red"), command=BtnMethods.malco)
-    root.mainloop()
 
 
 class BtnMethods:
@@ -192,13 +187,6 @@ class BtnMethods:
         alarm_hrs, alarm_mins, alarm_secs = int(alarm_hrs), int(alarm_mins), int(alarm_secs)
         sleep((alarm_hrs * (60 ** 2)) + (alarm_mins * (60 ** 1)) + (alarm_secs * (60 ** 0)))
         playsound.playsound("alarm.mp3")
-
-    @staticmethod
-    def malco():
-        global malc, malc_fbomb, malc_pram
-        malc = Tk()
-        malc_fbomb = Button(malc, text="Forkbomb", command=malcollect.forkbomb.run)
-        malc_pram = Button(malc, text="+RAM 0.4.1", command=malcollect.plusram_041.start)
 
 
 if __name__ == "__main__":
