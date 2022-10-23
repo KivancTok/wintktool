@@ -1,12 +1,15 @@
+# TODO DIST mac & linux
+import time
 import tkinter.simpledialog as tkdialog
+from os import startfile, system
 from tkinter import *
 from tkinter.scrolledtext import ScrolledText
 from tkinter.simpledialog import askstring
 from turtle import *
-from os import system, startfile
-from gtts import gTTS
-from time import sleep
+import datetime as dt
+
 import playsound
+from gtts import gTTS
 
 colors = {
     "red": "#FF3F5F",
@@ -23,16 +26,13 @@ def getcolor(name):
 
 root = Tk()
 root.title("Windows Tkinter Tool")
-root.geometry("585x350")
+root.geometry("620x400")
 
 
 editor: Tk
 editor_body: Text
 editor_menu: Menu
 editor_file_dropdown: Menu
-malc: Tk
-malc_fbomb: Button
-malc_pram: Button
 
 
 def main():
@@ -51,7 +51,7 @@ def main():
     py_console = Button(root, text="Open Python Console", bg=getcolor("orange"), command=BtnMethods.open_py_console)
     py_console.pack()
 
-    wte = Button(root, text="WinTkEdit", bg=getcolor("blue"), command=BtnMethods.wte)
+    wte = Button(root, text="WinTkEditor", bg=getcolor("blue"), command=BtnMethods.wte)
     wte.pack()
 
     satisfy_btn = Button(root, text="Satisfy yourself", bg=getcolor("blue"), command=BtnMethods.satisfy)
@@ -74,6 +74,11 @@ def main():
 
     set_alarm_btn = Button(root, text="Set Alarm", bg=getcolor("blue"), command=BtnMethods.set_alarm)
     set_alarm_btn.pack()
+
+    set_timer_btn = Button(root, text="Set Timer", bg=getcolor("blue"), command=BtnMethods.set_timer)
+    set_timer_btn.pack()
+
+    root.mainloop()
 
 
 class BtnMethods:
@@ -181,12 +186,27 @@ class BtnMethods:
 
     @staticmethod
     def set_alarm():
-        alarm_length = askstring("Input Alarm Length", "Enter how long the alarm will last (hh:mm:ss): ")
-        alarm_hrs_mins_secs = alarm_length.split(":")
-        alarm_hrs, alarm_mins, alarm_secs = alarm_hrs_mins_secs
-        alarm_hrs, alarm_mins, alarm_secs = int(alarm_hrs), int(alarm_mins), int(alarm_secs)
-        sleep((alarm_hrs * (60 ** 2)) + (alarm_mins * (60 ** 1)) + (alarm_secs * (60 ** 0)))
-        playsound.playsound("alarm.mp3")
+        t_alarm = askstring("Input Alarm Time", "Enter alarm time (hh:mm:ss): ")
+        alarm_time = dt.time(int(t_alarm.split(":")[0]), int(t_alarm.split(":")[1]), int(t_alarm.split(":")[2]))
+
+        def iittrta():
+            cur_time = dt.datetime.now()
+            ct = dt.time(cur_time.hour, cur_time.minute, cur_time.second)
+            if ct == alarm_time:
+                playsound.playsound('alarm.mp3')
+
+            else:
+                root.after(1, iittrta)
+
+        root.after(1, iittrta)
+
+    @staticmethod
+    def set_timer():
+        l_timer = askstring("Input Timer Length", "Enter timer length (hh:mm:ss): ")
+        timer_length = dt.time(int(l_timer.split(":")[0]), int(l_timer.split(":")[1]), int(l_timer.split(":")[2]))
+        secs = (3600 * timer_length.hour + 60 * timer_length.minute + timer_length.second)
+        time.sleep(secs)
+        playsound.playsound('alarm.mp3')
 
 
 if __name__ == "__main__":
