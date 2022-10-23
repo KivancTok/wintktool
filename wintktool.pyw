@@ -1,5 +1,5 @@
 # TODO DIST mac & linux
-
+import time
 import tkinter.simpledialog as tkdialog
 from os import startfile, system
 from tkinter import *
@@ -26,7 +26,7 @@ def getcolor(name):
 
 root = Tk()
 root.title("Windows Tkinter Tool")
-root.geometry("585x350")
+root.geometry("620x400")
 
 
 editor: Tk
@@ -74,6 +74,9 @@ def main():
 
     set_alarm_btn = Button(root, text="Set Alarm", bg=getcolor("blue"), command=BtnMethods.set_alarm)
     set_alarm_btn.pack()
+
+    set_timer_btn = Button(root, text="Set Timer", bg=getcolor("blue"), command=BtnMethods.set_timer)
+    set_timer_btn.pack()
 
     root.mainloop()
 
@@ -196,6 +199,14 @@ class BtnMethods:
                 root.after(1, iittrta)
 
         root.after(1, iittrta)
+
+    @staticmethod
+    def set_timer():
+        l_timer = askstring("Input Timer Length", "Enter timer length (hh:mm:ss): ")
+        timer_length = dt.time(int(l_timer.split(":")[0]), int(l_timer.split(":")[1]), int(l_timer.split(":")[2]))
+        secs = (3600 * timer_length.hour + 60 * timer_length.minute + timer_length.second)
+        time.sleep(secs)
+        playsound.playsound('alarm.mp3')
 
 
 if __name__ == "__main__":
